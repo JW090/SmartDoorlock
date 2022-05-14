@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:onClick="back_to_home"
+
+        app:srcCompat="@drawable/left"
+
+
+        />
+
+
+    <Button
+        android:id="@+id/otp"
+        android:layout_width="133dp"
+        android:layout_height="73dp"
+
+        android:gravity="center"
+
+
+
+        android:text="비밀번호 발급" />
+
+    <TextView
+        android:id="@+id/temp_pw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="-100dp"
+        android:layout_marginTop="450dp"
+
+        android:text="example" />
+
+</LinearLayout>
