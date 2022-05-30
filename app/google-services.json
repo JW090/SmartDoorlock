@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "196355385824",
+    "project_id": "smartdoorlock-6449b",
+    "storage_bucket": "smartdoorlock-6449b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196355385824:android:043f7b748c807f186aa385",
+        "android_client_info": {
+          "package_name": "gachon.mpclass.smartdoorlock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "196355385824-cltiasr2r4vt4t6id43r1l3nt5h2cc06.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gachon.mpclass.smartdoorlock",
+            "certificate_hash": "6e9abc8d2e731864374368463e9602dda4f86cdb"
+          }
+        },
+        {
+          "client_id": "196355385824-edp2gq32dh12tvt0gng61hqn62egqesh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiwYfZKESd7UQ3HUuFCmf84QSftVksvcc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "196355385824-edp2gq32dh12tvt0gng61hqn62egqesh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
