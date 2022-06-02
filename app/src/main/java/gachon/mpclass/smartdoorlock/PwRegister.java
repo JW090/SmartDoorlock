@@ -4,24 +4,39 @@ import static android.text.InputType.TYPE_CLASS_NUMBER;
 import static android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD;
 import static android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class PwRegister extends AppCompatActivity {
 
-    public String password;
+    static String password;
 
     Button set_newpw;
     Button reset_pw;
+
+    DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference pw_save = mRoot.child("Password");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +54,7 @@ public class PwRegister extends AppCompatActivity {
         set_newpw = findViewById(R.id.new_pw);
         reset_pw = findViewById(R.id.reset_pw);
 
+        //비밀번호 등록/재설정
         set_newpw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,10 +64,14 @@ public class PwRegister extends AppCompatActivity {
             }
         });
 
-
+        reset_pw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              resetpassword();
+            }
+        });
 
         }
-
 
         //새비밀번호 입력 팝업
         void enterpassword(){
@@ -62,12 +82,15 @@ public class PwRegister extends AppCompatActivity {
 
             final EditText pw = new EditText(this);
             pw.setInputType(TYPE_CLASS_NUMBER|TYPE_NUMBER_VARIATION_PASSWORD);
+            pw.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)
+            });
             alert.setView(pw);
 
             alert.setPositiveButton("저장",new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     password = pw.getText().toString();
+                    pw_save.setValue(password);
                 }
             });
 
@@ -80,6 +103,15 @@ public class PwRegister extends AppCompatActivity {
             });
 
             alert.show();
+
+        }
+
+        //비밀번호 재설정
+        public void resetpassword(){
+
+        pw_save.setValue(null);
+
+            Toast.makeText(getApplicationContext(),"비밀번호가 초기화되었습니다",Toast.LENGTH_LONG);
 
         }
 

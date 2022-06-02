@@ -23,7 +23,7 @@
         android:layout_marginLeft="105dp"
 
         android:layout_marginTop="250dp"
-        android:text="새 비밀번호 등록" />
+        android:text="비밀번호 등록" />
 
     <Button
         android:id="@+id/reset_pw"
@@ -32,7 +32,7 @@
         android:layout_marginLeft="105dp"
 
         android:layout_marginTop="450dp"
-        android:text="비밀번호 재설정" />
+        android:text="비밀번호 초기화" />
 
 
 

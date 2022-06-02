@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Android_S/AndroidStudioProjects/SmartDoorlock/app/src/main/res/layout/otp.xml" value="0.1" />
+        <entry key="..\:/Users/Android_S/AndroidStudioProjects/SmartDoorlock/app/src/main/res/layout/pw_register.xml" value="0.175" />
+        <entry key="..\:/Users/Android_S/AndroidStudioProjects/SmartDoorlock/app/src/main/res/layout/register.xml" value="0.175" />
+        <entry key="..\:/Users/Android_S/AndroidStudioProjects/SmartDoorlock/app/src/main/res/layout/reset_pw.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/Android_S/AndroidStudioProjects/SmartDoorlock/app/src/main/res/layout/start.xml" value="0.1703125" />
         <entry key="..\:/Users/JinWha/AndroidStudioProjects/SmartDoorlock/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/JinWha/AndroidStudioProjects/SmartDoorlock/app/src/main/res/drawable/back.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/JinWha/AndroidStudioProjects/SmartDoorlock/app/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
