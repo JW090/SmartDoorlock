@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         b_otp = findViewById(R.id.b_otp);
         b_record = findViewById(R.id.b_record);
         b_register = findViewById(R.id.b_register);
+        b_door = findViewById(R.id.b_door);
 
 
         //OTP버튼이벤트
@@ -49,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent =new Intent(getApplicationContext(), Registeration.class);
                 startActivity(intent);
+            }
+        });
+
+        //문열림
+        b_door.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 

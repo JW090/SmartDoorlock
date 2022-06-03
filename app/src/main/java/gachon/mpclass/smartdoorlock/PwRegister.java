@@ -67,7 +67,10 @@ public class PwRegister extends AppCompatActivity {
         reset_pw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              resetpassword();
+
+                resetpassword();
+                Toast.makeText(getApplicationContext(),"비밀번호가 초기화되었습니다",Toast.LENGTH_LONG);
+
             }
         });
 
@@ -110,8 +113,6 @@ public class PwRegister extends AppCompatActivity {
         public void resetpassword(){
 
         pw_save.setValue(null);
-
-            Toast.makeText(getApplicationContext(),"비밀번호가 초기화되었습니다",Toast.LENGTH_LONG);
 
         }
 
