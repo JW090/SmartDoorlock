@@ -1,15 +1,23 @@
 package gachon.mpclass.smartdoorlock;
 
+import static android.text.InputType.TYPE_CLASS_NUMBER;
+import static android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -78,16 +86,14 @@ public class RecordActivity extends AppCompatActivity {
                 int check_position = list_visitor.getCheckedItemPosition();
                 String data = (String)adapterView.getAdapter().getItem(i).toString();
 
-
-
                 Intent intent = new Intent(getApplicationContext(),VisitorList.class);
                 intent.putExtra("Visitor",data);
                 startActivity(intent);
             }
         });
 
-
     }
+
 
     //툴바액션
     @Override

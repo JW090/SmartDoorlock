@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ import com.google.firebase.storage.StorageReference;
 public class UserList extends AppCompatActivity {
 
     ImageView load_user;
+    Button b_delete_u;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class UserList extends AppCompatActivity {
         StorageReference pathReference = storageReference.child("face_registered");
 
         ImageView load_user = findViewById(R.id.user_image);
+        Button b_delete_u = findViewById(R.id.delete_user);
 
         String u_data = getIntent().getStringExtra("User");
         String u_img = u_data.substring(37);
@@ -53,6 +57,15 @@ public class UserList extends AppCompatActivity {
             });
 
         }
+
+        b_delete_u.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                storageReference.child(u_img).delete();
+                Intent i = new Intent(getApplicationContext(), FaceRegister.class);
+                startActivity(i);
+            }
+        });
 
         // 툴바 생성
         Toolbar toolbar = findViewById(R.id.usertoolbar);

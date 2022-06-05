@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class VisitorList extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +33,7 @@ public class VisitorList extends AppCompatActivity {
         StorageReference pathReference = storageReference.child("visitor");
 
         ImageView load_visitor = findViewById(R.id.visitor_image);
+        Button b_delete_v = findViewById(R.id.delete_visitor);
 
         String v_data = getIntent().getStringExtra("Visitor");
         String v_img = v_data.substring(37);
@@ -51,6 +55,17 @@ public class VisitorList extends AppCompatActivity {
             });
 
         }
+
+        //삭제버튼
+        b_delete_v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                storageReference.child(v_img).delete();
+                Intent i = new Intent(getApplicationContext(), RecordActivity.class);
+                startActivity(i);
+
+            }
+        });
 
         // 툴바 생성
         Toolbar toolbar = findViewById(R.id.visitortoolbar);
