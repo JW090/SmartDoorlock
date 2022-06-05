@@ -41,7 +41,6 @@ public class FaceRegister extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter(this , android.R.layout.simple_list_item_1,user_list);
 
-
         list_user.setAdapter(adapter);
 
 

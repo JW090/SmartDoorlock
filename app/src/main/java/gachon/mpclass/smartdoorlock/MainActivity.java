@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     Button b_register;
 
     DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference door_TF = mRoot.child("inputPW");
+    DatabaseReference door_TF = mRoot.child("inputPW").child("inputPW");
 
 
     @Override
