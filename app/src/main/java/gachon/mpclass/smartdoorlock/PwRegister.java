@@ -5,6 +5,7 @@ import static android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD;
 import static android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -49,7 +50,7 @@ public class PwRegister extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생김
         getSupportActionBar().setTitle("비밀번호 등록"); // 툴바 제목 설정
 
-        password = null;
+
 
         set_newpw = findViewById(R.id.new_pw);
         reset_pw = findViewById(R.id.reset_pw);
@@ -64,12 +65,23 @@ public class PwRegister extends AppCompatActivity {
             }
         });
 
+        pw_save.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                password = snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         reset_pw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 resetpassword();
-                Toast.makeText(getApplicationContext(),"비밀번호가 초기화되었습니다",Toast.LENGTH_LONG);
 
             }
         });
@@ -94,6 +106,8 @@ public class PwRegister extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     password = pw.getText().toString();
                     pw_save.setValue(password);
+                    Toast.makeText(getApplicationContext(), "등록되었습니다",Toast.LENGTH_SHORT).show();
+
                 }
             });
 
@@ -112,7 +126,16 @@ public class PwRegister extends AppCompatActivity {
         //비밀번호 재설정
         public void resetpassword(){
 
-        pw_save.setValue(null);
+        if(password==null){
+            Toast.makeText(getApplicationContext(), "비밀번호를 설정해주세요",Toast.LENGTH_SHORT).show();
+
+        }
+        else {
+
+            pw_save.setValue(null);
+            Toast.makeText(getApplicationContext(), "비밀번호가 초기화되었습니다",Toast.LENGTH_SHORT).show();
+        }
+
 
         }
 

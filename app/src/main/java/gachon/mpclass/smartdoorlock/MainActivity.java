@@ -7,12 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class MainActivity extends AppCompatActivity {
 
     Button b_otp;
     Button b_record;
     Button b_door;
     Button b_register;
+
+    DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference door_TF = mRoot.child("inputPW");
 
 
     @Override
@@ -57,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         b_door.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                door_TF.setValue("PASS");
 
             }
         });
