@@ -28,6 +28,7 @@ import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class RecordActivity extends AppCompatActivity {
 
@@ -63,19 +64,8 @@ public class RecordActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<ListResult>() {
                     @Override
                     public void onSuccess(ListResult listResult) {
-
-
-
-                        for (StorageReference item : listResult.getItems()) {
-                            visitor_list.addAll(listResult.getItems());
-                            adapter.notifyDataSetChanged();
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(),"Error", Toast.LENGTH_SHORT).show();
+                        visitor_list.addAll(listResult.getItems());
+                        adapter.notifyDataSetChanged();
                     }
                 });
 

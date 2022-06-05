@@ -41,7 +41,10 @@ public class FaceRegister extends AppCompatActivity {
 
         ArrayList<StorageReference> user_list = new ArrayList<>();
 
+
         ArrayAdapter<String> adapter = new ArrayAdapter(this , android.R.layout.simple_list_item_1,user_list);
+
+
         list_user.setAdapter(adapter);
 
 
@@ -53,21 +56,11 @@ public class FaceRegister extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<ListResult>() {
                     @Override
                     public void onSuccess(ListResult listResult) {
-
-
-
-                        for (StorageReference item : listResult.getItems()) {
-                            user_list.addAll(listResult.getItems());
-                            adapter.notifyDataSetChanged();
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(),"Error", Toast.LENGTH_SHORT).show();
+                        user_list.addAll(listResult.getItems());
+                        adapter.notifyDataSetChanged();
                     }
                 });
+
 
         //리스트 클릭 이벤트
         list_user.setOnItemClickListener(new AdapterView.OnItemClickListener() {
