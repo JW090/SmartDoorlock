@@ -61,7 +61,7 @@ public class UserList extends AppCompatActivity {
         b_delete_u.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                storageReference.child(u_img).delete();
+                storageReference.child(u_data).delete();
                 Intent i = new Intent(getApplicationContext(), FaceRegister.class);
                 startActivity(i);
             }
@@ -71,7 +71,7 @@ public class UserList extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.usertoolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생김
-        getSupportActionBar().setTitle(u_img); // 툴바 제목 설정
+        getSupportActionBar().setTitle(u_img.substring(16)); // 툴바 제목 설정
 
     }
 

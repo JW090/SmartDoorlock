@@ -35,7 +35,7 @@
     </LinearLayout>
 
     <ImageView
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="120dp"
         android:id="@+id/visitor_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

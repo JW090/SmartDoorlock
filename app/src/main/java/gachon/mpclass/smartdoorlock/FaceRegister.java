@@ -7,19 +7,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FaceRegister extends AppCompatActivity {
 
@@ -41,7 +39,6 @@ public class FaceRegister extends AppCompatActivity {
 
         ArrayList<StorageReference> user_list = new ArrayList<>();
 
-
         ArrayAdapter<String> adapter = new ArrayAdapter(this , android.R.layout.simple_list_item_1,user_list);
 
 
@@ -58,6 +55,7 @@ public class FaceRegister extends AppCompatActivity {
                     public void onSuccess(ListResult listResult) {
                         user_list.addAll(listResult.getItems());
                         adapter.notifyDataSetChanged();
+
                     }
                 });
 
@@ -68,8 +66,6 @@ public class FaceRegister extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 int check_position = list_user.getCheckedItemPosition();
                 String data = (String)adapterView.getAdapter().getItem(i).toString();
-
-
 
                 Intent intent = new Intent(getApplicationContext(),UserList.class);
                 intent.putExtra("User",data);
