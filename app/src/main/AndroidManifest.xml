@@ -25,6 +25,8 @@
         <activity android:name=".Registeration"/>
         <activity android:name=".FaceRegister"/>
         <activity android:name=".PwRegister"/>
+        <activity android:name=".VisitorList"/>
+        <activity android:name=".UserList"/>
     </application>
 
 </manifest>

@@ -1,44 +1,32 @@
 package gachon.mpclass.smartdoorlock;
 
 import android.content.Intent;
-import android.database.DataSetObserver;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.storage.StorageManager;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.bumptech.glide.Glide;
-import com.google.android.gms.auth.api.signin.internal.Storage;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.function.Function;
+import java.util.ArrayList;
 
 public class RecordActivity extends AppCompatActivity {
 
-    ImageView load_visitor;
+
     ListView list_visitor;
+
+    public ArrayList<String> visitor_list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +40,14 @@ public class RecordActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("방문자 기록"); // 툴바 제목 설정
 
         //방문자 리스트뷰
-        list_visitor = findViewById(R.id.visitor_list);
+       list_visitor = findViewById(R.id.visitor_list);
 
-        String[] visitor = {"2020-12-13","2020-12-15"};
+        ArrayList<StorageReference> visitor_list = new ArrayList<>();
 
-        ArrayAdapter <String> adapter = new ArrayAdapter(this , android.R.layout.simple_list_item_1, visitor);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this , android.R.layout.simple_list_item_1,visitor_list);
         list_visitor.setAdapter(adapter);
 
-
+        //리스트불러오기
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference listRef = storage.getReference().child("visitor");
 
@@ -68,26 +56,38 @@ public class RecordActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(ListResult listResult) {
 
-                        for (StorageReference prefix : listResult.getPrefixes()) {
-                            
-                        }
+
 
                         for (StorageReference item : listResult.getItems()) {
-                            // All the items under listRef.
+                            visitor_list.addAll(listResult.getItems());
+                            adapter.notifyDataSetChanged();
                         }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        // Uh-oh, an error occurred!
+                        Toast.makeText(getApplicationContext(),"Error", Toast.LENGTH_SHORT).show();
                     }
                 });
 
+        //리스트 클릭 이벤트
+        list_visitor.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                int check_position = list_visitor.getCheckedItemPosition();
+                String data = (String)adapterView.getAdapter().getItem(i).toString();
+
+
+
+                Intent intent = new Intent(getApplicationContext(),VisitorList.class);
+                intent.putExtra("Visitor",data);
+                startActivity(intent);
+            }
+        });
+
 
     }
-
-
 
     //툴바액션
     @Override
