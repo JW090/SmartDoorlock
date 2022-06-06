@@ -51,7 +51,6 @@ public class PwRegister extends AppCompatActivity {
         getSupportActionBar().setTitle("비밀번호 등록"); // 툴바 제목 설정
 
 
-
         set_newpw = findViewById(R.id.new_pw);
         reset_pw = findViewById(R.id.reset_pw);
 
