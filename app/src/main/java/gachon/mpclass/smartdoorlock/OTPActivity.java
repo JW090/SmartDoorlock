@@ -50,12 +50,12 @@ public class OTPActivity extends AppCompatActivity {
         timer = findViewById(R.id.otp_timer);
 
         //타이머
-        CountDownTimer cdt = new CountDownTimer(20*1000,1000) {
+        CountDownTimer cdt = new CountDownTimer(50*1000,1000) {
             @Override
             public void onTick(long l) {
 
                 int num = (int)(l/1000);
-                timer.setProgress(num*5);
+                timer.setProgress(num*2);
 
             }
 
@@ -72,9 +72,16 @@ public class OTPActivity extends AppCompatActivity {
                 }
 
                 String otp = Arrays.toString(arr).replaceAll("[^0-9]","");
-
                 new_otp.setText(otp);
-                otp_save.setValue(otp);
+
+                //비밀번호 암호화
+                String key = "0123456789abcdef0123456789abcdef";
+                try {
+                    String encText = AES.encByKey(key, otp);
+                    otp_save.setValue(encText);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
 
             }
@@ -94,12 +101,16 @@ public class OTPActivity extends AppCompatActivity {
                 }
 
                 String otp = Arrays.toString(arr).replaceAll("[^0-9]","");
-
                 new_otp.setText(otp);
-                otp_save.setValue(otp);
 
-
-
+                //비밀번호 암호화
+                String key = "0123456789abcdef0123456789abcdef";
+                try {
+                    String encText = AES.encByKey(key, otp);
+                    otp_save.setValue(encText);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 cdt.start();
 
             }

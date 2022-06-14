@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 public class PwRegister extends AppCompatActivity {
 
     static String password;
+    public static String alias = "com.test.alias";
 
     Button set_newpw;
     Button reset_pw;
@@ -104,7 +105,16 @@ public class PwRegister extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     password = pw.getText().toString();
-                    pw_save.setValue(password);
+
+                    //비밀번호 암호화
+                    String key = "0123456789abcdef0123456789abcdef";
+                    try {
+                        String encText = AES.encByKey(key, password);
+                        pw_save.setValue(encText);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                     Toast.makeText(getApplicationContext(), "등록되었습니다",Toast.LENGTH_SHORT).show();
 
                 }
