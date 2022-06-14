@@ -29,6 +29,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Base64;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+
 public class PwRegister extends AppCompatActivity {
 
     static String password;
@@ -108,9 +114,19 @@ public class PwRegister extends AppCompatActivity {
 
                     //비밀번호 암호화
                     String key = "0123456789abcdef0123456789abcdef";
+                    String iv = "0123456789abcdef";
+
                     try {
-                        String encText = AES.encByKey(key, password);
-                        pw_save.setValue(encText);
+                        //암호화
+                        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+                        IvParameterSpec ivParamSpec = new IvParameterSpec(iv.getBytes());
+                        SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(), "AES");
+                        cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivParamSpec);
+                        byte[] encrypted1 = cipher.doFinal(password.getBytes("UTF-8"));
+                        String encpw = Base64.getEncoder().encodeToString(encrypted1);
+
+                        pw_save.setValue(encpw);
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

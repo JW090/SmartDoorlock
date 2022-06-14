@@ -18,7 +18,12 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Random;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
 public class OTPActivity extends AppCompatActivity {
 
@@ -49,6 +54,10 @@ public class OTPActivity extends AppCompatActivity {
 
         timer = findViewById(R.id.otp_timer);
 
+        //암호화키
+        String key = "0123456789abcdef0123456789abcdef";
+        String iv = "0123456789abcdef";
+
         //타이머
         CountDownTimer cdt = new CountDownTimer(50*1000,1000) {
             @Override
@@ -75,10 +84,17 @@ public class OTPActivity extends AppCompatActivity {
                 new_otp.setText(otp);
 
                 //비밀번호 암호화
-                String key = "0123456789abcdef0123456789abcdef";
                 try {
-                    String encText = AES.encByKey(key, otp);
-                    otp_save.setValue(encText);
+
+                    Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+                    IvParameterSpec ivParamSpec = new IvParameterSpec(iv.getBytes());
+                    SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(), "AES");
+                    cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivParamSpec);
+                    byte[] encrypted1 = cipher.doFinal(otp.getBytes("UTF-8"));
+                    String encotp = Base64.getEncoder().encodeToString(encrypted1);
+
+                    otp_save.setValue(encotp);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -104,10 +120,15 @@ public class OTPActivity extends AppCompatActivity {
                 new_otp.setText(otp);
 
                 //비밀번호 암호화
-                String key = "0123456789abcdef0123456789abcdef";
                 try {
-                    String encText = AES.encByKey(key, otp);
-                    otp_save.setValue(encText);
+                    Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+                    IvParameterSpec ivParamSpec = new IvParameterSpec(iv.getBytes());
+                    SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(), "AES");
+                    cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivParamSpec);
+                    byte[] encrypted1 = cipher.doFinal(otp.getBytes("UTF-8"));
+                    String encotp = Base64.getEncoder().encodeToString(encrypted1);
+
+                    otp_save.setValue(encotp);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
